@@ -91,11 +91,28 @@ const lizzy = new Student({
   className: 'WEB20',
   favSubjects: ['HTML', 'C#', 'CSS']
 });
-const lizzy = new Student({
-  name: 'Elizabeth',
-  age: 38,
-  location: 'New Hampshire',
-  background: 'US Marines',
+const mason = new Student({
+  name: 'Mason',
+  age: 27,
+  location: 'Texas',
+  background: 'Music Teacher',
   className: 'WEB20',
-  favSubjects: ['HTML', 'C#', 'CSS']
+  favSubjects: ['HTML', 'JavaScript', 'CSS']
 });
+/*  
+    Project Manager Classes
+*/
+const patricia = new ProjectManager({
+  name: 'Patricia',
+  age: 24,
+  location: 'California',
+  gradClassName: 'WEB16',
+  favInstructor: 'Mark'
+})
+const peter = new ProjectManager({
+  name: 'Peter',
+  age: 31,
+  location: 'Kentucky',
+  gradClassName: 'WEB18',
+  favInstructor: 'Dan'
+})
