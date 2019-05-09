@@ -1,19 +1,19 @@
 // CODE here for your Lambda Classes
 class Person {
-    constructor(name, age, location){
-        this.name = name;
-        this.age = age;
-        this.location = location;
+    constructor(attr){
+        this.name = attr.name;
+        this.age = attr.age;
+        this.location = attr.location;
     }
     speak(){
       console.log(`Hello my name is ${this.name}, I am from ${this.location}.`)
     }
 }
 class Instructor extends Person{
-  constructor(specialty, favLanguage, catchPhrase, personAttrs){
-    super(personAttrs);
-    this.specialty = specialty;
-    this.favLanguage = favLanguage;  
+  constructor(personAttrs, specialty, favLanguage, catchPhrase){
+    super(personAttrs);                                                                              //Problem where name and location was coming undefined fixed it by 
+    this.specialty = specialty;                                                                      //having the first parameter in the constructor be the properties from 
+    this.favLanguage = favLanguage;                                                                  //the parent class
     this.catchPhrase = catchPhrase;
   }
   demo(subject){
@@ -24,14 +24,14 @@ class Instructor extends Person{
   }
 }
 class Student extends Person{
-  constructor(background, className, favSubjects, personAttrs){
-    super(personAttrs);
-    this.previousBackground = background;
-    this.className = className;  
-    this.favSubjects = favSubjects;
+  constructor(studentAttrs){
+    super(studentAttrs);
+    this.previousBackground = studentAttrs.background;
+    this.className = studentAttrs.className;  
+    this.favSubjects = studentAttrs.favSubjects;
   }
   listSubjects(){
-    console.log(`${this.name} favorite subjects are ${favSubjects}.`)
+    console.log(`${this.name}'s favorite subjects are ${this.favSubjects}.`)
   }
   prAssignment(subject){
     console.log(`${this.name} has submitted a PR for ${subject}.`)
@@ -41,7 +41,7 @@ class Student extends Person{
   }
 }
 class ProjectManager extends Instructor{
-  constructor(gradClassName, favInstructor, instructorAttrs){
+  constructor(instructorAttrs, gradClassName, favInstructor){                                               
     super(instructorAttrs);
     this.gradClassName = gradClassName;
     this.favInstructor = favInstructor;
@@ -53,6 +53,7 @@ class ProjectManager extends Instructor{
     console.log(`${this.name} debugs ${studentObj.name}'s code on ${subject}.`);
   }
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 /*  
     Instructor Classes
 */
@@ -75,13 +76,14 @@ const justin = new Instructor({
 /*  
     Student Classes
 */
+
 const michael = new Student({
   name: 'Michael',
   age: 21,
   location: 'California',
   background: 'Food Service',
   className: 'WEB20',
-  favSubjects: ['JavaScript', 'Python', 'CSS']
+  favSubjects: ['JavaScript', ' Python', ' CSS']
 });
 const lizzy = new Student({
   name: 'Elizabeth',
@@ -89,7 +91,7 @@ const lizzy = new Student({
   location: 'New Hampshire',
   background: 'US Marines',
   className: 'WEB20',
-  favSubjects: ['HTML', 'C#', 'CSS']
+  favSubjects: ['HTML', ' C#', ' CSS']
 });
 const mason = new Student({
   name: 'Mason',
@@ -97,7 +99,7 @@ const mason = new Student({
   location: 'Texas',
   background: 'Music Teacher',
   className: 'WEB20',
-  favSubjects: ['HTML', 'JavaScript', 'CSS']
+  favSubjects: ['HTML', ' JavaScript', ' CSS']
 });
 /*  
     Project Manager Classes
@@ -116,3 +118,25 @@ const peter = new ProjectManager({
   gradClassName: 'WEB18',
   favInstructor: 'Dan'
 })
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//                          test of person class
+patricia.speak();           
+dan.speak();
+mason.speak();
+
+//                         test of instructor class
+justin.demo('Ruby');
+dan.demo('Booleans');
+dan.grade(michael, 'Javascript');
+justin.grade(mason, 'something');
+
+//                          test of student class
+michael.listSubjects();
+lizzy.listSubjects();
+lizzy.prAssignment('Ruby');
+mason.sprintChallenge('Java');
+//                           test of prohject manager class
+patricia.grade(mason, 'Javascript');
+peter.standUp('web20_sprint2');
+peter.demo('HTML');
+patricia.grade(lizzy, 'Python');
