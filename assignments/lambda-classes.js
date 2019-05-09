@@ -9,6 +9,7 @@ class Person {
       console.log(`Hello my name is ${this.name}, I am from ${this.location}.`)
     }
 }
+
 class Instructor extends Person{
   constructor(personAttrs, specialty, favLanguage, catchPhrase){
     super(personAttrs);                                                                              //Problem where name and location was coming undefined fixed it by 
@@ -19,16 +20,31 @@ class Instructor extends Person{
   demo(subject){
     console.log(`Today we are learning about ${subject}.`)
   }
-  grade(studentObj, subject){
-    console.log(`${studentObj.name} recieves a perfect score on ${subject}.`)
+  // grade(studentObj, subject){
+  //   //console.log(`${studentObj.name} recieves a perfect score on ${subject}.`)                              //missunderstood stretch goal
+  //   console.log(`${studentObj.name} recieves a score of ${Math.floor(Math.random() * 100)} on ${subject}`)
+  // }
+  grade(studentObj){
+    return{
+      increment(){
+        const newGrade = studentObj.grade += Math.floor(Math.random() * 10)
+        return studentObj.grade = newGrade;                                                                 //after incrementing numbers would change they wouldn't stay at their new grade
+      },
+      decrement(){
+        const newGrade = studentObj.grade -= Math.floor(Math.random() * 10)
+        return studentObj.grade = newGrade;
+      }
+    }
   }
 }
+
 class Student extends Person{
   constructor(studentAttrs){
     super(studentAttrs);
     this.previousBackground = studentAttrs.background;
     this.className = studentAttrs.className;  
     this.favSubjects = studentAttrs.favSubjects;
+    this.grade = studentAttrs.grade;
   }
   listSubjects(){
     console.log(`${this.name}'s favorite subjects are ${this.favSubjects}.`)
@@ -39,7 +55,16 @@ class Student extends Person{
   sprintChallenge(subject){
     console.log(`${this.name} has begun sprint challenge on ${subject}.`)
   }
+  graduate(subject){
+    if(this.grade > 70){
+      console.log(`Congratulations ${this.name}! You are ready to graduate!!`)
+    } else {
+      console.log(`We will have to re grade you ${this.name}...`)
+      grade(this, subject);
+    }
+  }
 }
+
 class ProjectManager extends Instructor{
   constructor(instructorAttrs, gradClassName, favInstructor){                                               
     super(instructorAttrs);
@@ -53,6 +78,7 @@ class ProjectManager extends Instructor{
     console.log(`${this.name} debugs ${studentObj.name}'s code on ${subject}.`);
   }
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*  
     Instructor Classes
@@ -83,7 +109,8 @@ const michael = new Student({
   location: 'California',
   background: 'Food Service',
   className: 'WEB20',
-  favSubjects: ['JavaScript', ' Python', ' CSS']
+  favSubjects: ['JavaScript', ' Python', ' CSS'],
+  grade: 65
 });
 const lizzy = new Student({
   name: 'Elizabeth',
@@ -91,7 +118,8 @@ const lizzy = new Student({
   location: 'New Hampshire',
   background: 'US Marines',
   className: 'WEB20',
-  favSubjects: ['HTML', ' C#', ' CSS']
+  favSubjects: ['HTML', ' C#', ' CSS'],
+  grade: 79
 });
 const mason = new Student({
   name: 'Mason',
@@ -99,7 +127,8 @@ const mason = new Student({
   location: 'Texas',
   background: 'Music Teacher',
   className: 'WEB20',
-  favSubjects: ['HTML', ' JavaScript', ' CSS']
+  favSubjects: ['HTML', ' JavaScript', ' CSS'],
+  grade: 42
 });
 /*  
     Project Manager Classes
@@ -140,3 +169,19 @@ patricia.grade(mason, 'Javascript');
 peter.standUp('web20_sprint2');
 peter.demo('HTML');
 patricia.grade(lizzy, 'Python');
+//                            testing grade method on instructors and pms
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+// console.log(dan.grade(mason).increment())
+
+// console.log(patricia.grade(lizzy).decrement());
+// console.log(patricia.grade(lizzy).decrement());
+// console.log(patricia.grade(lizzy).decrement());
+// console.log(patricia.grade(lizzy).decrement());
+// console.log(patricia.grade(lizzy).decrement());
